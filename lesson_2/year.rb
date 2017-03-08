@@ -9,14 +9,18 @@ month = gets.chomp.to_i
 puts "Введите год"
 year = gets.chomp.to_i
 
-months =  [ 31, 28, 31, 31, 30, 31, 30, 31, 30, 31, 30, 31 ]
+months  = [ 31, 28, 31, 31, 30, 31, 30, 31, 30, 31, 30, 31 ]
+days    = day
 
-months.each_with_index { |d, i| day += d if month - 1 > i }
-
-if ( year % 400 == 0 || year % 4 == 0 && year % 100 != 0 ) && ( month > 2 && day > 28 )
-  day += 1
+months.each.with_index(1) do |month_days, i|
+  break if month <= i
+  days += month_days
 end
 
-puts "=> #{day}"
+if ( year % 400 == 0 || year % 4 == 0 && year % 100 != 0 ) && ( month > 2 && day > 28 )
+  days += 1
+end
 
+answer = ( month == 1 ) ? "=> #{day}" : "=> #{days}"
 
+puts answer

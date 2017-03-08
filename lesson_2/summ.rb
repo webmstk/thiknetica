@@ -18,7 +18,7 @@ until product_name == "stop"
   product_price = gets.to_f
 
   puts "Введите количество товара "
-  product_quantity = gets.to_i
+  product_quantity = gets.to_f
 
   cart[product_name] = { quantity: product_quantity, price: product_price }
 
