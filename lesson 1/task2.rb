@@ -6,5 +6,5 @@ puts "Введите основание треуголиника"
 base = gets.to_f
 puts "Введите высоту треуголиника"
 height = gets.to_f
-area = 1/2.0 * base * height
+area = 0.5 * base * height
 puts "Площадь треуголиника ровна: #{area}"

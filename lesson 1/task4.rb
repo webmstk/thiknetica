@@ -17,9 +17,11 @@ c = gets.to_f
 
 discriminant = b**2 - 4*a*c
 
+sqrt = Math.sqrt(discriminant
+
 if discriminant > 0
-  x1 = ( -b + Math.sqrt(discriminant) ) / ( 2*a )
-  x2 = ( -b - Math.sqrt(discriminant) ) / ( 2*a )
+  x1 = ( -b + sqrt ) ) / ( 2*a )
+  x2 = ( -b - sqrt ) ) / ( 2*a )
   puts "Дискриминант:#{discriminant}, первый корень: #{x1.round(3)}, второй корень: #{x2.round(3)}"
 elsif discriminant == 0
   x1 = ( -b + 2*a )

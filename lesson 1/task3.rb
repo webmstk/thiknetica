@@ -12,12 +12,12 @@ side_b = gets.to_f
 print "Введите сторону c: "
 side_c = gets.to_f
 
-side_a, side_b, side_c = [side_a, side_b, side_c].sort.reverse
-hypotenuse = side_a
+side_a, side_b, side_c = [side_a, side_b, side_c].sort
+hypotenuse = side_c
 
-pifagor = hypotenuse**2 == (side_b**2 + side_c**2) ? "прямоугольным" : "не прямоугольным"
+pifagor = ( hypotenuse**2 == ( side_b**2 + side_c**2 ) ) ? "прямоугольным" : "не прямоугольным"
 
-isosceles = side_a == side_b || side_b == side_c ? "равнобедренным" : "разносторонним"
+isosceles = (side_a == side_b || side_b == side_c) ? "равнобедренным" : "разносторонним"
 
 if side_a == side_b && side_b == side_c
   puts "Треугольник равнобедренный и равносторонний, но не прямоугольный."
