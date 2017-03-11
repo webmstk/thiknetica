@@ -14,6 +14,7 @@
 class Train
 # Имеет номер (произвольная строка) и тип (грузовой, пассажирский) и количество вагонов, эти данные указываются при создании экземпляра класса
   attr_accessor :speed, :qnt_wagon, :train_route, :current_route
+  attr_reader   :name, :type
 
   def initialize(name, type, qnt_wagon, speed: 0)
     @name           = name

@@ -44,7 +44,14 @@ train1.backward
 train1.current_station
 
 train2 = Train.new("passanger train", :passanger, 8)
+train3 = Train.new("passanger train 3", :passanger, 8)
 
 # Станция
-railway = RailwayStation.new("start", train1)
-p railway
+railway = RailwayStation.new("start")
+
+railway.coming_train(train1)
+railway.coming_train(train2)
+railway.coming_train(train3)
+puts "Текущие поезда"
+railway.show_trains_on_station
+railway.show_types_trains_on_station
