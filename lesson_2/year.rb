@@ -17,7 +17,7 @@ months.each.with_index(1) do |month_days, i|
   days += month_days
 end
 
-if ( year % 400 == 0 || year % 4 == 0 && year % 100 != 0 ) && ( month > 2 && day > 28 )
+if ( month > 2 && day > 28 ) || ( year % 400 == 0 || year % 4 == 0 && year % 100 != 0 )
   days += 1
 end
 
