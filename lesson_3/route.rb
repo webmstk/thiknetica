@@ -8,26 +8,22 @@
 
 class Route
 
-attr_accessor :route_list
+attr_reader :stations
 # Имеет начальную и конечную станцию, а также список промежуточных станций. Начальная и конечная станции указываютсся при создании маршрута, а промежуточные могут добавляться между ними.
-  def initialize(start_staion, end_station)
-    @start_staion = start_staion.to_s
-    @end_station  = end_station.to_s
-    @route_list   = [@start_staion, @end_station]
+  def initialize(stations = [])
+    @stations = stations
   end
   # Может добавлять промежуточную станцию в список
   def add_station(station)
-    @route_list.insert(-2, station)
-    puts "Стнация #{station} добавлена к маршруту"
+    @stations.insert(-2, station)
+    "Стнация #{station} добавлена к маршруту"
   end
   # Может удалять промежуточную станцию из списка
   def delete_station(station)
-    @route_list.delete(station)
-    puts "Стнация #{station} убрана с маршрута"
+    @stations.delete(station)
+    "Стнация #{station} убрана с маршрута"
   end
-  # Может выводить список всех станций по-порядку от начальной до конечной
-  def show_all_stations
-    puts "#{@route_list} \n"
-  end
+  # Может выводить список всех станций по-порядку от начальной до конечной attr_reader :sations
+
 
 end
