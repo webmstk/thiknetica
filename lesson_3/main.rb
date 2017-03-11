@@ -55,3 +55,5 @@ railway.coming_train(train3)
 puts "Текущие поезда"
 railway.show_trains_on_station
 railway.show_types_trains_on_station
+railway.leave_train(train1)
+railway.show_types_trains_on_station
