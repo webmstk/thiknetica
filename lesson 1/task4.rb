@@ -17,7 +17,7 @@ c = gets.to_f
 
 discriminant = b**2 - 4*a*c
 
-sqrt = Math.sqrt(discriminant
+sqrt = Math.sqrt(discriminant)
 
 if discriminant > 0
   x1 = ( -b + sqrt ) ) / ( 2*a )
