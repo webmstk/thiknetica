@@ -94,7 +94,7 @@ p train1.next_stantion
 p train1.current_station
 p train1.prev_stantion
 
-p station_two
+p station_one.show_trains_by_types(:cargo)
 
 
 
