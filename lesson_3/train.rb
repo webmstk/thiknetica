@@ -13,16 +13,15 @@
 
 class Train
 # Имеет номер (произвольная строка) и тип (грузовой, пассажирский) и количество вагонов, эти данные указываются при создании экземпляра класса
-  attr_accessor :speed, :qnt_wagon, :route, :current_route
-  attr_reader   :name, :type
+  attr_accessor :speed, :qnt_wagon
+  attr_reader   :number, :type, :route
 
-  def initialize(name, number, type, qnt_wagon, speed: 0)
-    @name           = name
+  def initialize(number, type, qnt_wagon)
     @number         = number
     @type           = type
     @qnt_wagon      = qnt_wagon
-    @speed          = speed
-    @route          = []
+    @speed          = 0
+    @route_id       = 0
   end
   # Может набирать скорость
   def gain_speed
@@ -40,49 +39,60 @@ class Train
   end
   # Может показывать количество вагонов
   def show_qnt_wagon
-    "Количество вагонов у #{@name} = #{@qnt_wagon}"
+    "Количество вагонов у поезда №#{@number} = #{@qnt_wagon}"
   end
   # Может прицеплять/отцеплять вагоны (по одному вагону за операцию, метод просто увеличивает или уменьшает количество вагонов).
   # Прицепка/отцепка вагонов может осуществляться только если поезд не движется.
   def hitch_wagon
-    @qnt_wagon += 1 if @speed.zero?
-    "Вагон присоединен"
+    if @speed.zero?
+      @qnt_wagon += 1
+      "Вагон присоединен"
+    end
   end
   def unhook_wagon
-    @qnt_wagon -= 1 if @speed.zero? && @qnt_wagon != 0
-    "Вагон отсоединен"
+    if @speed.zero? && @qnt_wagon > 0
+      @qnt_wagon -= 1
+      "Вагон отсоединен"
+    end
   end
   # Может принимать маршрут следования (объект класса Route)
-  def take_routes(station)
-    @route          = station
-    @index_stsation = @route.index(station[0])
-    @current_route  = @route[@index_stsation]
+  def route=(route)
+    @route = route.stations
+  end
+  def current_station
+    @current_station = @route[@route_id]
+    "Текущуая станция #{@current_station}"
   end
   # Может перемещаться между станциями, указанными в маршруте. Вперед\назад
   def forward
-    if @route.size > @index_stsation + 1
-      @current_route = @route[@index_stsation += 1]
+    unless @current_station == @route.last
+      @current_station = @route[@route_id += 1]
     else
-      "Вы на конечной станции"
+      "Вперед некуда"
     end
   end
   def backward
-    unless @index_stsation.zero?
-      @current_route = @route[@index_stsation -= 1]
+    unless @current_station == @route.first
+      @current_station = @route[@route_id -= 1]
     else
-      "Вы на начальной станции"
+      "Назад некуда"
     end
   end
-  # Показывать предыдущую станцию, текущую, следующую, на основе маршрута
-  def what_previous_station
-    "Предыдущая станция #{@route[@index_stsation - 1]}"
-  end
-  def current_station
-    "Текущуая станция #{@current_route}"
-  end
-  def what_next_station
-    "Следующуя станция #{@route[@index_stsation + 1]}"
-  end
 
+  # Показывать предыдущую станцию, текущую, следующую, на основе маршрута
+  def next_stantion
+    unless @current_station == @route.last
+      "След станция - #{@route[@route_id + 1]}"
+    else
+      "Вперед некуда"
+    end
+  end
+  def prev_stantion
+    unless @current_station == @route.first
+      "Предыдущуя станция - #{@route[@route_id - 1]}"
+    else
+      "Назад некуда"
+    end
+  end
 
 end

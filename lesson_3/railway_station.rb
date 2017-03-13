@@ -8,6 +8,7 @@
 =end
 
 class RailwayStation
+
   attr_reader :trains, :name
   # Имеет название, которое указывается при ее создании
   def initialize(name)
@@ -19,16 +20,13 @@ class RailwayStation
     @trains << train
   end
   # Может показывать список всех поездов на станции, находящиеся в текущий момент
-  def show_trains_on_station
-    @trains.each {|k| puts k.name}
-  end
   # Может показывать список поездов на станции по типу (см. ниже): кол-во грузовых, пассажирских
-  def show_types_trains_on_station(type) #TODO по переданному типу
+  def show_trains_by_types(type)
     types_train = Hash.new(0)
-    @trains.map do |k|
-      types_train[k.type] += 1
+    @trains.map do |train|
+      types_train[train.type] += 1 if train.type == type
     end
-    "Количество #{type} на станции = #{types_train[type]}"
+    "Количество '#{type}' на станции = #{types_train[type]}"
   end
   # Может отправлять поезда (по одному за раз, при этом, поезд удаляется из списка поездов, находящихся на станции).
   def leave_train(train)
