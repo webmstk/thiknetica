@@ -66,6 +66,13 @@ class Train
 
   # Показывать предыдущую станцию, текущую, следующую, на основе маршрута
 
+  def next_station
+    @route[@current_route_id + 1]
+  end
+  def prev_station
+    @route[@current_route_id - 1]
+  end
+
   private
 
   def stopped?
