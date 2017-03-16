@@ -16,12 +16,11 @@ attr_reader :stations
   # Может добавлять промежуточную станцию в список
   def add_station(station)
     @stations.insert(-2, station)
-    "Стнация '#{station}' добавлена к маршруту"
   end
   # Может удалять промежуточную станцию из списка
   def delete_station(station)
     @stations.delete(station)
-    "Стнация '#{station}' убрана с маршрута"
   end
   # Может выводить список всех станций по-порядку от начальной до конечной attr_reader :sations
 end
+

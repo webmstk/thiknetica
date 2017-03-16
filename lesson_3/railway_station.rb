@@ -22,11 +22,7 @@ class RailwayStation
   # Может показывать список всех поездов на станции, находящиеся в текущий момент
   # Может показывать список поездов на станции по типу (см. ниже): кол-во грузовых, пассажирских
   def show_trains_by_types(type)
-    types_train = Hash.new(0)
-    @trains.map do |train|
-      types_train[train.type] += 1 if train.type == type
-    end
-    "Количество '#{type}' на станции = #{types_train[type]}"
+    @trains.select { |train| train.type == type}
   end
   # Может отправлять поезда (по одному за раз, при этом, поезд удаляется из списка поездов, находящихся на станции).
   def leave_train(train)
