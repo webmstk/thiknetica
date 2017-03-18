@@ -21,8 +21,21 @@ train1.get_route = route1
 train1.forward
 train1.forward
 train1.forward
+train1.forward
+train1.forward
+train1.forward
+train1.backward
+train1.backward
+train1.backward
+train1.backward
+train1.backward
+train1.backward
+train1.backward
+p train1.prev_station
 
-p station2.show_trains_by_types(:cargo).size
+
+
+p station1.show_trains_by_types(:cargo).size
 
 
 

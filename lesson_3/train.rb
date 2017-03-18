@@ -25,7 +25,7 @@ class Train
     @type                   = type
     @qnt_wagon              = qnt_wagon
     @speed                  = 0
-    @current_route_id       = 0
+    @current_station_id     = 0
   end
   # Может набирать скорость
   def gain_speed
@@ -48,43 +48,58 @@ class Train
   # Может принимать маршрут следования (объект класса Route)
   def get_route=(route)
     @route = route.stations
-    @current_route = route.stations[@current_route_id]
   end
 
   # Может перемещаться между станциями, указанными в маршруте. Вперед\назад
   def forward
-    leave
-    @current_route = @route[@current_route_id += 1]
-    go_to_station
+    unless current_route == last_route
+      leave
+      @current_station_id += 1
+      go_to_station
+    end
   end
 
   def backward
-    leave
-    @current_route = @route[@current_route_id -= 1]
-    go_to_station
+    unless current_route == first_route
+      leave
+      @current_station_id -= 1
+      go_to_station
+    end
   end
 
   # Показывать предыдущую станцию, текущую, следующую, на основе маршрута
+  def current_route
+    @route[@current_station_id]
+  end
 
   def next_station
-    @route[@current_route_id + 1]
+    @route[@current_station_id + 1] if current_route != last_route
   end
   def prev_station
-    @route[@current_route_id - 1]
+    @route[@current_station_id - 1] if current_route != first_route
   end
 
-  private
+  protected
+
+  def first_route
+    @route&.first
+  end
+
+  def last_route
+    @route.last
+  end
 
   def stopped?
     @speed.zero?
   end
 
   def leave
-    @route[@current_route_id].leave_train(self)
+    self.current_route.leave_train(self)
   end
 
   def go_to_station
-    @route[@current_route_id].coming_train(self)
+    self.current_route.coming_train(self)
   end
+
 
 end
