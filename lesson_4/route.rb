@@ -20,6 +20,7 @@ attr_reader :stations
   # Может удалять промежуточную станцию из списка
   def delete_station(station)
     @stations.delete(station)
+
   end
   # Может выводить список всех станций по-порядку от начальной до конечной attr_reader :sations
 end

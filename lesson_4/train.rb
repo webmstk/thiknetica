@@ -38,18 +38,19 @@ class Train
   # Прицепка/отцепка вагонов может осуществляться только если поезд не движется.
 
   def hitch_wagon(wagon)
-    if stopped? && ( wagon.is_a?(wagon_type) )
+    if stopped? && valid_wagon?(wagon)
       @wagon << wagon
     end
   end
   def unhook_wagon(wagon)
-    if stopped? && ( wagon.is_a?(wagon_type) )
+    if stopped? && valid_wagon?(wagon)
       @wagon.pop
     end
   end
   # Может принимать маршрут следования (объект класса Route)
   def get_route=(route)
     @route = route.stations
+    go_to_station
   end
 
   # Количество вагонов
@@ -86,7 +87,7 @@ class Train
     @route[@current_station_id - 1] if current_station != first_route
   end
 
-  # protected
+  protected
 
   def first_route
     @route.first
@@ -101,11 +102,15 @@ class Train
   end
 
   def leave
-    self.current_station.leave_train(self)
+    current_station.leave_train(self)
   end
 
   def go_to_station
     current_station.coming_train(self)
+  end
+
+  def valid_wagon?(wagon)
+    wagon.is_a?(wagon_type)
   end
 
   def wagon_type
