@@ -29,65 +29,73 @@ class App
     @trains   = []
   end
 
-# Создавать станции
-def create_station(input)
-  @stations << RailwayStation.new(input)
-end
-
-# Создавать маршруты и управлять станциями в нем (добавлять, удалять)
-def create_route(first_station, last_statinon)
-  @routes << Route.new(find_station(first_station), find_station(last_statinon))
-end
-
-# Добавить станции к маршруту
-def add_station_to_route(station, start_s, end_s)
-  find_route(start_s, end_s).add_station(create_station(station)) #TODO ПЕРЕДЕЛАТЬ
-end
-
-# Удалить станцию с маршрута
-def del_station_in_route(station, start_s, end_s)
-
-end
-
-# Создавать поезда
-def create_train(chose, number)
-  if chose == 1
-    @trains << PassangerTrain.new(number)
-  elsif chose == 2
-    @trains << CargoTrain.new(number)
+  # Создавать станции
+  def create_station(input)
+    @stations << RailwayStation.new(input)
   end
-end
-# Назначать маршрут поезду
-def set_route(number_t, start_s, end_s)
-  find_train(number_t).get_route = find_route(start_s, end_s)
-end
 
-# Перемещать поезд по маршруту вперед и назад
-def forward(number)
-  find_train(number).forward
-end
-# Просматривать список станций и список поездов на станции
+  # Создавать маршруты и управлять станциями в нем (добавлять, удалять)
+  def create_route(first_station, last_statinon)
+    @routes << Route.new(find_station(first_station), find_station(last_statinon))
+  end
 
-# Добавлять вагоны к поезду
-def add_wagon(number, wagon)
-  find_train(number).hitch_wagon(wagon)
-end
-# Отцеплять вагоны от поезда
-def del_wagon(number, wagon)
-  find_train(number).unhook_wagon(wagon)
-end
-# Поиск маршрута
-def find_route(start_station, end_station)
-  @routes.find { |r| r.stations.first.name == start_station && r.stations.last.name == end_station }
-end
-# Поиск поезда
-def find_train(number)
-  @trains.find { |t| t.number == number}
-end
-# Поиск станции
-def find_station(name)
-  @stations.find { |s| s.name == name}
-end
+  # Добавить станции к маршруту
+  def add_station_to_route(station, start_s, end_s)
+    create_station(station)
+    find_route(start_s, end_s).add_station( find_station(station) )
+  end
+
+  # Удалить станцию с маршрута, но не из app.stations
+  def del_station_in_route(station, start_s, end_s)
+    find_route(start_s, end_s).delete_station( find_station(station) )
+  end
+
+  # Создавать поезда
+  def create_train(chose, number)
+    if chose == 1
+      @trains << PassangerTrain.new(number)
+    elsif chose == 2
+      @trains << CargoTrain.new(number)
+    end
+  end
+  # Назначать маршрут поезду
+  def set_route(number_t, start_s, end_s)
+    find_train(number_t).get_route = find_route(start_s, end_s)
+  end
+
+  # Перемещать поезд по маршруту вперед и назад
+  def forward(number)
+    find_train(number).forward
+  end
+  def backward(number)
+    find_train(number).backward
+  end
+  # Просматривать список станций и список поездов на станции TODO станции обработать в клиентской части по attr stations
+  def show_train_on_station(station, type)
+    find_station(station).show_trains_by_types(type)
+  end
+
+  # Добавлять вагоны к поезду
+  def add_wagon(number, wagon)
+    find_train(number).hitch_wagon(wagon)
+  end
+  # Отцеплять вагоны от поезда
+  def del_wagon(number, wagon)
+    find_train(number).unhook_wagon(wagon)
+  end
+  # Поиск маршрута
+  # protected
+  def find_route(start_station, end_station)
+    @routes.find { |r| r.stations.first.name == start_station && r.stations.last.name == end_station }
+  end
+  # Поиск поезда
+  def find_train(number)
+    @trains.find { |t| t.number == number}
+  end
+  # Поиск станции
+  def find_station(name)
+    @stations.find { |s| s.name == name}
+  end
 
 end
 
