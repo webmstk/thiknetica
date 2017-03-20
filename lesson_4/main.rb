@@ -1,6 +1,6 @@
 require_relative "output"
 
-menu  = Output.new
+menu  = App.new
 
 loop do
 
@@ -23,17 +23,17 @@ loop do
   case input
 
   when 1
-    menu.create_station
+    menu.make_station
   when 2
-    menu.create_train
+    menu.make_train
   when 3
     menu.manipulate_routes
   when 4
-    menu.set_route
+    menu.giv_route
   when 5
-    menu.add_wagon
+    menu.add_wagons
   when 6
-    menu.del_wagon
+    menu.del_wagons
   when 7
     menu.move_trains
   when 8
