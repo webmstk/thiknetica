@@ -1,4 +1,4 @@
-require_relative "output"
+require_relative "app"
 
 menu  = App.new
 
