@@ -42,8 +42,8 @@ class Train
       @wagon << wagon
     end
   end
-  def unhook_wagon(wagon)
-    if stopped? && valid_wagon?(wagon)
+  def unhook_wagon
+    if stopped?
       @wagon.pop
     end
   end

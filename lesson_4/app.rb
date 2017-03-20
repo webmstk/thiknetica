@@ -80,17 +80,18 @@ class App
     find_train(number).hitch_wagon(wagon)
   end
   # Отцеплять вагоны от поезда
-  def del_wagon(number, wagon)
-    find_train(number).unhook_wagon(wagon)
+  def del_wagon(number)
+    find_train(number).unhook_wagon
   end
+  protected
   # Поиск маршрута
-  # protected
   def find_route(start_station, end_station)
     @routes.find { |r| r.stations.first.name == start_station && r.stations.last.name == end_station }
   end
   # Поиск поезда
   def find_train(number)
     @trains.find { |t| t.number == number}
+  rescue
   end
   # Поиск станции
   def find_station(name)
